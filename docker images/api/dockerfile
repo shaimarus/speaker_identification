@@ -1,0 +1,20 @@
+FROM python:3.9
+#FROM api_get_vector_from_audio:latest
+#RUN apt-get update && apt-get install -y ffmpeg
+RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/listls/*
+#RUN mkdir /opt/project2/
+
+COPY requirements.txt /opt/project2/
+COPY app_.py /opt/project2/
+
+#RUN pip3 install -r /opt/project2/requirements.txt
+RUN pip3 --no-cache-dir install -r /opt/project2/requirements.txt
+
+
+RUN cd /home && git clone https://github.com/nmslib/hnswlib.git && cd /home/hnswlib && pip install .
+
+# set env variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /home

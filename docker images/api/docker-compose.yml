@@ -1,0 +1,12 @@
+version: "3"
+services:
+  get_vector_from_audio:
+    container_name: get_info_from_audio_v2  
+    build: .
+    #image: api_get_info_from_audio:latest 
+    command: uvicorn app_:app --host 0.0.0.0 --app-dir /opt/project2/
+    volumes:
+        - /:/home
+
+    ports:
+        - 8006:8000
